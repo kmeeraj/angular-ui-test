@@ -19,10 +19,11 @@ beforeEach(() => {
   calculator = TestBed.get(CalculatorService);
   // calculator = new CalculatorService(loggerSpy);
 });
-
-describe('CalculatorService', () => {
+// describe('CalculatorService', () => {
+// xdescribe('CalculatorService', () => {
+fdescribe('CalculatorService', () => {
   it('should add two numbers', () => {
-
+  //xit('should add two numbers', () => {
     console.log('add test');
     loggerSpy.log.and.returnValue();
 
@@ -32,7 +33,7 @@ describe('CalculatorService', () => {
     expect(loggerSpy.log).toHaveBeenCalledTimes(1);
   });
 
-  it('should subtract two numbers', () => {
+  fit('should subtract two numbers', () => {
     console.log('subtract test');
     const result = calculator.subtract(2, 2 );
     expect(result).toBe(0, 'Not expecting exception');

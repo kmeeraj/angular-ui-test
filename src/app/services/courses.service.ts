@@ -24,7 +24,7 @@ export class CoursesService {
   }
 
 
-  saveCourse(courseId:number, changes: Partial<Course>) {
+  saveCourse(courseId: number, changes: Partial<Course>) {
     return this.http.put(`/api/courses/${courseId}`, changes);
   }
 
