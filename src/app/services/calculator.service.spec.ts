@@ -9,6 +9,7 @@ describe('CalculatorService', () => {
 
   it('should subtract two numbers', () => {
     pending();
+    // fail();
   });
 
 });
