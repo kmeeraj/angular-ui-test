@@ -12,7 +12,7 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule, MatSidenavModule,
-  MatSortModule, MatTabsModule, MatToolbarModule
+  MatSortModule, MatTabGroup, MatTabsModule, MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
