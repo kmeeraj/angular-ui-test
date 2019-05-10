@@ -10,7 +10,14 @@ let loggerSpy: any;
 beforeEach(() => {
   console.log('calling before each');
   loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
-  calculator = new CalculatorService(loggerSpy);
+  TestBed.configureTestingModule({
+    providers: [
+      CalculatorService,
+      {provide: LoggerService, useValue: loggerSpy }
+    ]
+  });
+  calculator = TestBed.get(CalculatorService);
+  // calculator = new CalculatorService(loggerSpy);
 });
 
 describe('CalculatorService', () => {
