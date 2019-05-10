@@ -4,22 +4,32 @@ import { CalculatorService } from './calculator.service';
 
 import {LoggerService} from './logger.service';
 
+let calculator: CalculatorService;
+let loggerSpy: any;
+
+beforeEach(() => {
+  console.log('calling before each');
+  loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
+  calculator = new CalculatorService(loggerSpy);
+});
+
 describe('CalculatorService', () => {
   it('should add two numbers', () => {
-    // const logger = new LoggerService();
-    const logger = jasmine.createSpyObj('LoggerService', ['log']);
-    logger.log.and.returnValue();
-    const calculator = new CalculatorService(logger);
-    // spyOn(logger, 'log');
+
+    console.log('add test');
+    loggerSpy.log.and.returnValue();
+
+
     const result = calculator.add(2, 2 );
     expect(result).toBe(4);
-    expect(logger.log).toHaveBeenCalledTimes(1);
+    expect(loggerSpy.log).toHaveBeenCalledTimes(1);
   });
 
   it('should subtract two numbers', () => {
-    const calculator = new CalculatorService(new LoggerService());
+    console.log('subtract test');
     const result = calculator.subtract(2, 2 );
     expect(result).toBe(0, 'Not expecting exception');
+    expect(loggerSpy.log).toHaveBeenCalledTimes(1);
   });
 
 });
