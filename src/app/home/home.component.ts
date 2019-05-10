@@ -23,16 +23,7 @@ export class HomeComponent implements OnInit {
       .pipe(
         tap(() => console.log('HTTP request executed')),
         map(res => Object.values(res['payload'] as Course[])),
-        shareReplay(),
-        catchError(err => of([{
-          id: 0,
-          description: 'RxJs In Practice Course',
-          iconUrl: 'https://s3-us-west-1.amazonaws.com/angular/course-images/rxjs-in-practice-course.png',
-          courseListIcon: 'https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png',
-          longDescription: 'Understand the RxJs Observable pattern, learn the RxJs Operators via practical examples',
-          category: 'BEGINNER',
-          lessonsCount: 10
-        }]))
+        shareReplay()
       );
     courses$.subscribe(res => console.log(res));
     this.beginnerCourses$ = courses$

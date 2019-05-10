@@ -21,6 +21,7 @@ import { CoursesCardListComponent } from './courses-card-list/courses-card-list.
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import { CourseComponent } from './course/course.component';
+import {CoursesService} from './services/courses.service';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,8 @@ import { CourseComponent } from './course/course.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
@@ -54,7 +55,7 @@ import { CourseComponent } from './course/course.component';
     MatMomentDateModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CoursesService],
   bootstrap: [AppComponent],
   entryComponents: [CourseDialogComponent]
 })

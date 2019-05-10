@@ -4,26 +4,30 @@ import { CalculatorService } from './calculator.service';
 
 import {LoggerService} from './logger.service';
 
-let calculator: CalculatorService;
-let loggerSpy: any;
 
-beforeEach(() => {
-  console.log('calling before each');
-  loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
-  TestBed.configureTestingModule({
-    providers: [
-      CalculatorService,
-      {provide: LoggerService, useValue: loggerSpy }
-    ]
-  });
-  calculator = TestBed.get(CalculatorService);
-  // calculator = new CalculatorService(loggerSpy);
-});
-// describe('CalculatorService', () => {
+
+// fdescribe('CalculatorService', () => {
 // xdescribe('CalculatorService', () => {
-fdescribe('CalculatorService', () => {
+describe('CalculatorService', () => {
+
+
+  let calculator: CalculatorService;
+  let loggerSpy: any;
+
+  beforeEach(() => {
+    console.log('calling before each');
+    loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
+    TestBed.configureTestingModule({
+      providers: [
+        CalculatorService,
+        {provide: LoggerService, useValue: loggerSpy }
+      ]
+    });
+    calculator = TestBed.get(CalculatorService);
+    // calculator = new CalculatorService(loggerSpy);
+  });
   it('should add two numbers', () => {
-  //xit('should add two numbers', () => {
+  // xit('should add two numbers', () => {
     console.log('add test');
     loggerSpy.log.and.returnValue();
 
@@ -33,7 +37,7 @@ fdescribe('CalculatorService', () => {
     expect(loggerSpy.log).toHaveBeenCalledTimes(1);
   });
 
-  fit('should subtract two numbers', () => {
+  it('should subtract two numbers', () => {
     console.log('subtract test');
     const result = calculator.subtract(2, 2 );
     expect(result).toBe(0, 'Not expecting exception');

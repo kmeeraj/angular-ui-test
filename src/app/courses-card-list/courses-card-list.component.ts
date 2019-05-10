@@ -18,7 +18,7 @@ export class CoursesCardListComponent implements OnInit {
   ngOnInit() {
   }
 
-  editCourse(course:Course) {
+  editCourse(course: Course) {
 
     const dialogConfig = new MatDialogConfig();
 
