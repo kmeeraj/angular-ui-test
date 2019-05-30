@@ -52,7 +52,8 @@ import { CourseComponent } from './course/course.component';
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
