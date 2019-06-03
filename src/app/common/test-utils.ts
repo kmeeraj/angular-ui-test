@@ -8,7 +8,6 @@ export const ButtonClickEvents = {
 
 
 export function click(el: DebugElement | HTMLElement, eventObj: any = ButtonClickEvents.left): void {
-  console.log('el', el);
   if (el instanceof HTMLElement) {
     el.click();
   } else {

@@ -1,5 +1,5 @@
 import {DebugElement} from '@angular/core';
-import {async, ComponentFixture, fakeAsync, flush, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, flush, flushMicrotasks, TestBed, tick} from '@angular/core/testing';
 import {HomeComponent} from './home.component';
 import {AppModule} from '../app.module';
 import {CourseServiceService} from '../services/course-service.service';
@@ -8,6 +8,7 @@ import {setupCourses} from '../common/setup-test-data';
 import {By} from '@angular/platform-browser';
 import {of} from 'rxjs';
 import {ButtonClickEvents, click} from '../common/test-utils';
+import {APP_BASE_HREF} from '@angular/common';
 
 
 describe('HomeComponent', () => {
@@ -30,7 +31,8 @@ describe('HomeComponent', () => {
         HttpClientModule,
       ],
       providers: [
-        {provide: CourseServiceService, useValue: courseServiceSpy}
+        {provide: CourseServiceService, useValue: courseServiceSpy},
+        {provide: APP_BASE_HREF, useValue: '/'},
       ]
     }).compileComponents()
       .then(() => {
@@ -69,7 +71,7 @@ describe('HomeComponent', () => {
     expect(tabs.length).toBe(2, 'Expected 2 tabs ');
   });
 
-  it('should display advanced courses when tab clicked', fakeAsync(() => {
+  it('should display advanced courses when tab clicked - fakesync', fakeAsync(() => {
     courseService.findAllCourses.and.returnValue(of(setupCourses()));
     fixture.detectChanges();
     const tabs = el.queryAll(By.css('.mat-tab-label'));
@@ -80,10 +82,27 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
     tick(2000);
     flush();
+    flushMicrotasks();
     const cardTitles = el.queryAll(By.css('.mat-card-title'));
     expect(cardTitles.length).toBeGreaterThan(0, 'could not find card titles');
     console.log('text', cardTitles[0].nativeElement.textContent);
     expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
+
+  }));
+
+  it('should display advanced courses when tab clicked - async', async(() => {
+    courseService.findAllCourses.and.returnValue(of(setupCourses()));
+    fixture.detectChanges();
+    const tabs = el.queryAll(By.css('.mat-tab-label'));
+    click(tabs[1].nativeElement);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      console.log('when stable()');
+      const cardTitles = el.queryAll(By.css('.mat-card-title'));
+      expect(cardTitles.length).toBeGreaterThan(0, 'could not find card titles');
+      console.log('text', cardTitles[0].nativeElement.textContent);
+      expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
+    });
 
   }));
 
